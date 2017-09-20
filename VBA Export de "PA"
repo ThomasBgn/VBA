@@ -1,0 +1,136 @@
+Sub Export_PA()
+
+Dim Type_dossier As Single
+Type_dossier = InputBox("Bonjour, renseigner '1' pour un export STD ou '2' pour un export CEM", "Export", "", Type1)
+
+'''''''''''''''''''''''
+'''Def des variables'''
+'''''''''''''''''''''''
+
+Dim Compteur As Single
+Compteur = 0
+
+Dim Boucle As Single
+Boucle = 0
+
+Dim Compteur2 As Single
+Compteur2 = 2
+
+Dim Pa As Variant
+Pa = 0
+
+Dim Pa2 As Variant
+Pa2 = 0
+
+Dim Pb As Variant
+Pb = 0
+
+Dim Pb2 As Variant
+Pb2 = 0
+
+
+'''''''''''
+''Methode''
+'''''''''''
+
+'Choix tu type d'export "CEM" = 1 ou "STD" = 2
+If Type_dossier <> 1 Then
+    'Si dif de 1 ou 2 Erreur
+    If Type_dossier <> 2 Then
+        MsgBox "Merci de renseigner 1 ou 2"
+    'Si input =2
+    ElseIf Type_dossier = 2 Then
+        Sheets("Cloture CEM 2017").Select
+        'début de la boucle
+        Compteur = 3
+        While Boucle = 0
+            Pa = Cells(Compteur, 6)
+            Pb = Cells(Compteur, 7)
+            
+            'Si Pa = vide alors on stop la bloucle
+            If Pa = "" Then
+                Boucle = 1
+                MsgBox "Fini"
+                
+            ElseIf Pa <> Pa2 Then
+                Sheets("Export").Cells(Compteur2, 1) = Sheets("Cloture CEM 2017").Cells(Compteur, 6)
+                Pa2 = Pa
+                
+                If Pb <> Pb2 Then
+                    Sheets("Export").Cells(Compteur2, 2) = Sheets("Cloture CEM 2017").Cells(Compteur, 7)
+                    Compteur = Compteur + 1
+                    Compteur2 = Compteur2 + 1
+                    Boucle = 0
+                    Pb2 = Pb
+                
+                ElseIf Pb = Pb2 Then
+                Compteur = Compteur + 1
+                'Compteur2 = Compteur2 + 1
+                Boucle = 0
+                End If
+            
+            ElseIf Pa = Pa2 Then
+                
+                If Pb <> Pb2 Then
+                    Sheets("Export").Cells(Compteur2, 2) = Sheets("Cloture CEM 2017").Cells(Compteur, 7)
+                    Compteur = Compteur + 1
+                    Compteur2 = Compteur2 + 1
+                    Boucle = 0
+                    Pb2 = Pb
+                
+                ElseIf Pb = Pb2 Then
+                Compteur = Compteur + 1
+                'Compteur2 = Compteur2 + 1
+                Boucle = 0
+                End If
+            End If   
+        Wend
+    End If
+
+'Si input =1
+ElseIf Type_dossier = 1 Then
+Sheets("Classique").Select
+        Compteur = 2
+        While Boucle = 0
+            Pa = Cells(Compteur, 3)
+            Pb = Cells(Compteur, 2)
+
+            If Pa = "" Then
+                Boucle = 1
+                MsgBox "Fini"
+            
+            ElseIf Pa <> Pa2 Then
+                Sheets("Export").Cells(Compteur2, 1) = Sheets("Classique").Cells(Compteur, 3)
+                Pa2 = Pa
+                
+                If Pb <> Pb2 Then
+                    Sheets("Export").Cells(Compteur2, 2) = Sheets("Classique").Cells(Compteur, 2)
+                    Compteur = Compteur + 1
+                    Compteur2 = Compteur2 + 1
+                    Boucle = 0
+                    Pb2 = Pb
+                
+                ElseIf Pb = Pb2 Then
+                Compteur = Compteur + 1
+                'Compteur2 = Compteur2 + 1
+                Boucle = 0
+                End If
+            
+            ElseIf Pa = Pa2 Then
+                
+                If Pb <> Pb2 Then
+                    Sheets("Export").Cells(Compteur2, 2) = Sheets("Classique").Cells(Compteur, 2)
+                    Compteur = Compteur + 1
+                    Compteur2 = Compteur2 + 1
+                    Boucle = 0
+                    Pb2 = Pb
+                
+                ElseIf Pb = Pb2 Then
+                Compteur = Compteur + 1
+                'Compteur2 = Compteur2 + 1
+                Boucle = 0
+                End If
+            End If
+        Wend
+End If
+End Sub
