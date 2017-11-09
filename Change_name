@@ -1,0 +1,42 @@
+Sub Change_Nom()
+
+Dim boucle As String
+boucle = 1
+
+Dim x As Variant
+x = 1
+
+Dim repertoire As Variant
+repertoire = "\\srv-Nord\data\Public\PA-000F_Photos\"
+
+Dim Oldn1 As Variant
+Oldn1 = repertoire & "BT" & x & "_1.jpg"
+
+Dim Newn1 As Variant
+Newn1 = repertoire & "BT" & x & ".jpg"
+
+Dim Oldn2 As Variant
+Oldn2 = repertoire & "BT" & x & "_2.jpg"
+
+Dim Newn2 As Variant
+Newn2 = repertoire & "Armement BT" & x & ".jpg"
+
+
+While boucle = 1
+
+    Oldn1 = repertoire & "BT" & x & "_1.jpg"
+    Newn1 = repertoire & "BT" & x & ".jpg"
+    Oldn2 = repertoire & "BT" & x & "_2.jpg"
+    Newn2 = repertoire & "Armement BT" & x & ".jpg"
+    
+    If Dir(Oldn1) = "" Then
+        MsgBox "Fini"
+        boucle = 0
+    Else
+        Name Oldn1 As Newn1
+        Name Oldn2 As Newn2
+        x = x + 1
+    End If
+Wend
+
+End Sub
